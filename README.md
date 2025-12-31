@@ -44,3 +44,15 @@ Run the unit tests with:
 ```bash
 python -m unittest discover
 ```
+
+## Animated web demo
+
+A lightweight animated calculator UI is available under `web/`. Serve that
+folder locally to try the parallax particle field and animated mode/result
+transitions:
+
+```bash
+python -m http.server 8000 --directory web
+```
+
+Then open http://localhost:8000 in your browser.
