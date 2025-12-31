@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+    <div class="app-shell">
+      <header class="top-bar">
+        <div class="title">
+          <span class="accent">Animated</span>
+          <span>Calculator</span>
+        </div>
+        <div id="mode-wipe" aria-hidden="true"></div>
+        <div class="operations" role="group" aria-label="Select operation">
+          <button class="mode-button is-active" data-mode="add">Add</button>
+          <button class="mode-button" data-mode="sub">Subtract</button>
+          <button class="mode-button" data-mode="mul">Multiply</button>
+          <button class="mode-button" data-mode="div">Divide</button>
+          <button class="mode-button" data-mode="pow">Power</button>
+        </div>
+      </header>
+
+      <main class="card">
+        <form id="calculator-form" autocomplete="off">
+          <label class="field">
+            <span class="label">Numbers</span>
+            <input
+              id="operands"
+              name="operands"
+              type="text"
+              inputmode="decimal"
+              placeholder="Enter numbers separated by space or comma"
+              required
+            />
+          </label>
+          <p class="helper">At least two numbers are required.</p>
+          <button type="submit" class="primary">Calculate</button>
+        </form>
+
+        <section class="result" aria-live="polite">
+          <p class="label">Result</p>
+          <div id="result-value" class="result-value">Waiting for input…</div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
