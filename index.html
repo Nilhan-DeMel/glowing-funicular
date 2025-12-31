@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accessible Calculator</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="particle-layer" aria-hidden="true"></div>
+    <header class="app-header">
+      <div>
+        <p class="kicker">Utility</p>
+        <h1>Calculator</h1>
+      </div>
+      <button class="ghost" id="openSettings" aria-label="Open settings" aria-haspopup="dialog" aria-expanded="false" aria-controls="settingsDrawer" aria-keyshortcuts="Control+S">
+        ⚙️ Settings
+      </button>
+    </header>
+
+    <main class="calculator" aria-label="Calculator">
+      <section class="display" aria-live="polite">
+        <div class="expression" id="expressionLabel">0</div>
+        <div class="result" id="resultLabel">Result</div>
+      </section>
+
+      <section class="keypad" aria-label="Calculator keypad">
+        <button class="chip" data-input="sin(" aria-label="Sine" aria-keyshortcuts="S">sin</button>
+        <button class="chip" data-input="cos(" aria-label="Cosine" aria-keyshortcuts="C">cos</button>
+        <button class="chip" data-input="tan(" aria-label="Tangent" aria-keyshortcuts="T">tan</button>
+        <button class="chip warning" data-action="clear" aria-label="Clear entry" aria-keyshortcuts="Escape">AC</button>
+
+        <button class="pill" data-input="(" aria-label="Left parenthesis" aria-keyshortcuts="(">(</button>
+        <button class="pill" data-input=")" aria-label="Right parenthesis" aria-keyshortcuts=")">)</button>
+        <button class="pill" data-input="π" aria-label="Pi" aria-keyshortcuts="P">π</button>
+        <button class="pill" data-input="^" aria-label="Exponent" aria-keyshortcuts="^">^</button>
+
+        <button class="pill" data-input="7" aria-label="Digit 7" aria-keyshortcuts="7">7</button>
+        <button class="pill" data-input="8" aria-label="Digit 8" aria-keyshortcuts="8">8</button>
+        <button class="pill" data-input="9" aria-label="Digit 9" aria-keyshortcuts="9">9</button>
+        <button class="pill" data-input="÷" aria-label="Divide" aria-keyshortcuts="/">÷</button>
+
+        <button class="pill" data-input="4" aria-label="Digit 4" aria-keyshortcuts="4">4</button>
+        <button class="pill" data-input="5" aria-label="Digit 5" aria-keyshortcuts="5">5</button>
+        <button class="pill" data-input="6" aria-label="Digit 6" aria-keyshortcuts="6">6</button>
+        <button class="pill" data-input="×" aria-label="Multiply" aria-keyshortcuts="*">×</button>
+
+        <button class="pill" data-input="1" aria-label="Digit 1" aria-keyshortcuts="1">1</button>
+        <button class="pill" data-input="2" aria-label="Digit 2" aria-keyshortcuts="2">2</button>
+        <button class="pill" data-input="3" aria-label="Digit 3" aria-keyshortcuts="3">3</button>
+        <button class="pill" data-input="−" aria-label="Subtract" aria-keyshortcuts="-">−</button>
+
+        <button class="pill" data-input="0" aria-label="Digit 0" aria-keyshortcuts="0">0</button>
+        <button class="pill" data-input="." aria-label="Decimal point" aria-keyshortcuts=".">.</button>
+        <button class="pill" data-action="delete" aria-label="Delete last entry" aria-keyshortcuts="Backspace">⌫</button>
+        <button class="pill" data-input="+" aria-label="Add" aria-keyshortcuts="+">+</button>
+
+        <button class="primary" data-action="equals" aria-label="Calculate result" aria-keyshortcuts="Enter">=</button>
+      </section>
+    </main>
+
+    <aside class="drawer" id="settingsDrawer" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" hidden>
+      <div class="drawer__header">
+        <h2 id="settingsTitle">Settings</h2>
+        <button class="ghost" id="closeSettings" aria-label="Close settings">Close</button>
+      </div>
+      <div class="drawer__content">
+        <label class="field">
+          <span>Precision</span>
+          <select id="precisionSelect">
+            <option value="2">2 decimals</option>
+            <option value="4" selected>4 decimals</option>
+            <option value="8">8 decimals</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Number separators</span>
+          <select id="separatorSelect">
+            <option value="comma" selected>Commas</option>
+            <option value="space">Spaces</option>
+            <option value="none">None</option>
+          </select>
+        </label>
+        <fieldset class="field">
+          <legend>Angle units</legend>
+          <label><input type="radio" name="angle" value="deg" checked /> Degrees</label>
+          <label><input type="radio" name="angle" value="rad" /> Radians</label>
+        </fieldset>
+        <label class="field">
+          <span>Theme</span>
+          <select id="themeSelect">
+            <option value="system" selected>System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </label>
+      </div>
+    </aside>
+    <div class="scrim" id="scrim" hidden></div>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>
