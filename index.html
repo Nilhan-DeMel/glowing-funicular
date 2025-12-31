@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Client Expression Calculator</p>
+          <h1>Calculator</h1>
+          <p class="subtitle">
+            Type or build an expression, validate locally, and view results with saved
+            history.
+          </p>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel">
+          <div class="display">
+            <label class="label" for="expression-input">Expression</label>
+            <div class="input-row">
+              <input
+                id="expression-input"
+                name="expression"
+                autocomplete="off"
+                placeholder="Try: (2 + 3) * 4 / 2 ^ 2"
+              />
+              <button id="evaluate" class="primary">=</button>
+            </div>
+            <div class="pill" id="result-display">Ready to calculate</div>
+          </div>
+
+          <div class="keypad">
+            <div class="keypad-grid">
+              <button data-token="7">7</button>
+              <button data-token="8">8</button>
+              <button data-token="9">9</button>
+              <button data-token="/" class="accent">÷</button>
+
+              <button data-token="4">4</button>
+              <button data-token="5">5</button>
+              <button data-token="6">6</button>
+              <button data-token="*" class="accent">×</button>
+
+              <button data-token="1">1</button>
+              <button data-token="2">2</button>
+              <button data-token="3">3</button>
+              <button data-token="-" class="accent">−</button>
+
+              <button data-token="0">0</button>
+              <button data-token=".">.</button>
+              <button data-token="^" class="accent">^</button>
+              <button data-token="+" class="accent">+</button>
+
+              <button data-token="(">(</button>
+              <button data-token=")">)</button>
+              <button id="backspace">⌫</button>
+              <button id="clear">AC</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel history">
+          <div class="history-header">
+            <div>
+              <p class="eyebrow">HistoryPanel</p>
+              <h2>Stored expressions</h2>
+              <p class="subtitle">Recent results are saved locally for reuse.</p>
+            </div>
+            <button id="clear-history" class="ghost">Clear history</button>
+          </div>
+          <div id="history-list" class="history-list" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast-container" aria-live="assertive" aria-atomic="true"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

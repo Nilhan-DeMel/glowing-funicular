@@ -23,6 +23,20 @@ python calculator.py pow 2 3
 
 If you provide an unsupported operation, too few operands, or attempt division by zero, the program prints an error message and exits.
 
+## Web client
+
+A browser-based calculator lives in `index.html` and runs entirely on the client. It:
+
+- Parses and validates expressions locally (supports `+`, `-`, `*`, `/`, `^`, and parentheses).
+- Shows toast errors for malformed expressions or division by zero.
+- Saves recent calculations in `localStorage` and renders a HistoryPanel with copy and favorite toggles.
+
+To try it locally, start a static server from the project root and open `http://localhost:8000`:
+
+```bash
+python -m http.server 8000
+```
+
 ## Testing
 
 Run the unit tests with:
