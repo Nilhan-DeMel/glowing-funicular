@@ -30,3 +30,13 @@ Run the unit tests with:
 ```bash
 python -m unittest discover
 ```
+
+## Frontend layout
+
+An atmospheric Vite + React + TypeScript playground lives in `frontend/`. It uses `styled-components` and theme tokens mapped to CSS variables for quick mode switching.
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
