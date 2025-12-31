@@ -23,6 +23,14 @@ python calculator.py pow 2 3
 
 If you provide an unsupported operation, too few operands, or attempt division by zero, the program prints an error message and exits.
 
+## Web calculator
+
+An accessible, keyboard-friendly calculator UI is available via `index.html`. Open the file in a browser to:
+
+- Enter expressions with buttons, keyboard shortcuts (digits 0–9, operators, Enter, Backspace), and quick trigonometry keys (S, C, T for sin/cos/tan, P for π).
+- Toggle settings in the drawer (Ctrl/Cmd + S) for precision, number separators, angle units, and light/dark/system themes.
+- Respect reduced-motion preferences by disabling background particles and ripple effects automatically.
+
 ## Testing
 
 Run the unit tests with:
