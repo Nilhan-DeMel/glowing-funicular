@@ -24,10 +24,42 @@ const historyList = document.getElementById("history-list");
 const evaluateButton = document.getElementById("evaluate");
 const clearHistoryButton = document.getElementById("clear-history");
 const toastContainer = document.getElementById("toast-container");
+const tokenKeys = new Set([
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  ".",
+  "+",
+  "-",
+  "*",
+  "/",
+  "^",
+  "(",
+  ")",
+]);
+
+function isTextInputLike(element) {
+  return (
+    element &&
+    (element.tagName === "INPUT" ||
+      element.tagName === "TEXTAREA" ||
+      element.isContentEditable ||
+      element.getAttribute("role") === "textbox")
+  );
+}
 
 function showToast(message, variant = "error", duration = 3200) {
   const toast = document.createElement("div");
   toast.className = `toast ${variant}`;
+  toast.setAttribute("role", variant === "error" ? "alert" : "status");
+  toast.setAttribute("aria-live", variant === "error" ? "assertive" : "polite");
   toast.textContent = message;
   toastContainer.appendChild(toast);
   setTimeout(() => {
@@ -58,11 +90,13 @@ function formatTimestamp(timestamp) {
 }
 
 function renderHistory() {
+  historyList.setAttribute("role", "list");
   historyList.innerHTML = "";
   if (!history.length) {
     const empty = document.createElement("p");
     empty.className = "subtitle";
     empty.textContent = "No calculations yet. Your history will appear here.";
+    empty.setAttribute("role", "note");
     historyList.appendChild(empty);
     return;
   }
@@ -72,6 +106,8 @@ function renderHistory() {
   sorted.forEach((item) => {
     const row = document.createElement("div");
     row.className = "history-item";
+    row.setAttribute("role", "listitem");
+    row.setAttribute("aria-label", `${item.expression} equals ${item.result}`);
 
     const content = document.createElement("div");
     const title = document.createElement("p");
@@ -112,11 +148,17 @@ function renderHistory() {
     const copyBtn = document.createElement("button");
     copyBtn.textContent = "Copy";
     copyBtn.title = "Copy expression to clipboard";
+    copyBtn.setAttribute("aria-label", `Copy ${item.expression} = ${item.result}`);
     copyBtn.addEventListener("click", () => copyExpression(item));
 
     const favBtn = document.createElement("button");
     favBtn.textContent = item.favorite ? "★" : "☆";
     favBtn.title = "Toggle favorite";
+    favBtn.setAttribute("aria-pressed", String(item.favorite));
+    favBtn.setAttribute(
+      "aria-label",
+      item.favorite ? "Remove from favorites" : "Mark as favorite"
+    );
     favBtn.addEventListener("click", () => toggleFavorite(item.timestamp));
 
     actions.appendChild(copyBtn);
@@ -382,6 +424,7 @@ function evaluateExpression() {
     const rpn = toRPN(tokens);
     const value = evaluateRPN(rpn);
     resultDisplay.textContent = `Result: ${value}`;
+    resultDisplay.setAttribute("aria-live", "polite");
     resultDisplay.classList.add("pill-success");
     const entry = {
       expression,
@@ -428,6 +471,41 @@ function bindEvents() {
     if (event.key === "Enter") {
       event.preventDefault();
       evaluateExpression();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+
+    const key = event.key;
+    const target = event.target;
+    const targetIsInput = target === expressionInput || isTextInputLike(target);
+
+    if (tokenKeys.has(key)) {
+      if (!targetIsInput) {
+        appendToExpression(key);
+        event.preventDefault();
+      }
+      return;
+    }
+
+    if (key === "Enter" || key === "=") {
+      event.preventDefault();
+      evaluateExpression();
+      return;
+    }
+
+    if (key === "Backspace") {
+      if (!targetIsInput) {
+        event.preventDefault();
+        removeLastChar();
+      }
+      return;
+    }
+
+    if (key === "Escape") {
+      event.preventDefault();
+      clearExpression();
     }
   });
 }

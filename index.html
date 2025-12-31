@@ -29,38 +29,48 @@
                 name="expression"
                 autocomplete="off"
                 placeholder="Try: (2 + 3) * 4 / 2 ^ 2"
+                aria-describedby="result-display"
               />
-              <button id="evaluate" class="primary">=</button>
+              <button
+                id="evaluate"
+                class="primary"
+                aria-label="Evaluate expression"
+                aria-keyshortcuts="Enter ="
+              >
+                =
+              </button>
             </div>
-            <div class="pill" id="result-display">Ready to calculate</div>
+            <div class="pill" id="result-display" role="status" aria-live="polite">
+              Ready to calculate
+            </div>
           </div>
 
           <div class="keypad">
-            <div class="keypad-grid">
-              <button data-token="7">7</button>
-              <button data-token="8">8</button>
-              <button data-token="9">9</button>
-              <button data-token="/" class="accent">÷</button>
+            <div class="keypad-grid" role="grid" aria-label="Calculator keypad">
+              <button data-token="7" aria-label="Seven" aria-keyshortcuts="7">7</button>
+              <button data-token="8" aria-label="Eight" aria-keyshortcuts="8">8</button>
+              <button data-token="9" aria-label="Nine" aria-keyshortcuts="9">9</button>
+              <button data-token="/" class="accent" aria-label="Divide" aria-keyshortcuts="/">÷</button>
 
-              <button data-token="4">4</button>
-              <button data-token="5">5</button>
-              <button data-token="6">6</button>
-              <button data-token="*" class="accent">×</button>
+              <button data-token="4" aria-label="Four" aria-keyshortcuts="4">4</button>
+              <button data-token="5" aria-label="Five" aria-keyshortcuts="5">5</button>
+              <button data-token="6" aria-label="Six" aria-keyshortcuts="6">6</button>
+              <button data-token="*" class="accent" aria-label="Multiply" aria-keyshortcuts="*">×</button>
 
-              <button data-token="1">1</button>
-              <button data-token="2">2</button>
-              <button data-token="3">3</button>
-              <button data-token="-" class="accent">−</button>
+              <button data-token="1" aria-label="One" aria-keyshortcuts="1">1</button>
+              <button data-token="2" aria-label="Two" aria-keyshortcuts="2">2</button>
+              <button data-token="3" aria-label="Three" aria-keyshortcuts="3">3</button>
+              <button data-token="-" class="accent" aria-label="Subtract" aria-keyshortcuts="-">−</button>
 
-              <button data-token="0">0</button>
-              <button data-token=".">.</button>
-              <button data-token="^" class="accent">^</button>
-              <button data-token="+" class="accent">+</button>
+              <button data-token="0" aria-label="Zero" aria-keyshortcuts="0">0</button>
+              <button data-token="." aria-label="Decimal point" aria-keyshortcuts=".">.</button>
+              <button data-token="^" class="accent" aria-label="Exponent" aria-keyshortcuts="^">^</button>
+              <button data-token="+" class="accent" aria-label="Add" aria-keyshortcuts="+">+</button>
 
-              <button data-token="(">(</button>
-              <button data-token=")">)</button>
-              <button id="backspace">⌫</button>
-              <button id="clear">AC</button>
+              <button data-token="(" aria-label="Open parenthesis" aria-keyshortcuts="(">(</button>
+              <button data-token=")" aria-label="Close parenthesis" aria-keyshortcuts=")">)</button>
+              <button id="backspace" aria-label="Delete last character" aria-keyshortcuts="Backspace">⌫</button>
+              <button id="clear" aria-label="Clear expression" aria-keyshortcuts="Escape">AC</button>
             </div>
           </div>
         </section>
@@ -72,9 +82,21 @@
               <h2>Stored expressions</h2>
               <p class="subtitle">Recent results are saved locally for reuse.</p>
             </div>
-            <button id="clear-history" class="ghost">Clear history</button>
+            <button
+              id="clear-history"
+              class="ghost"
+              aria-label="Clear calculation history"
+              aria-keyshortcuts="Ctrl+Backspace"
+            >
+              Clear history
+            </button>
           </div>
-          <div id="history-list" class="history-list" aria-live="polite"></div>
+          <div
+            id="history-list"
+            class="history-list"
+            aria-live="polite"
+            aria-label="Calculation history entries"
+          ></div>
         </section>
       </main>
     </div>
