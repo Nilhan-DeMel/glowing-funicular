@@ -30,37 +30,37 @@
                 autocomplete="off"
                 placeholder="Try: (2 + 3) * 4 / 2 ^ 2"
               />
-              <button id="evaluate" class="primary">=</button>
+              <button id="evaluate" class="primary" aria-label="Evaluate expression">=</button>
             </div>
             <div class="pill" id="result-display">Ready to calculate</div>
           </div>
 
           <div class="keypad">
-            <div class="keypad-grid">
-              <button data-token="7">7</button>
-              <button data-token="8">8</button>
-              <button data-token="9">9</button>
-              <button data-token="/" class="accent">÷</button>
+            <div class="keypad-grid" role="grid" aria-label="Calculator keypad">
+              <button data-token="7" aria-label="Seven">7</button>
+              <button data-token="8" aria-label="Eight">8</button>
+              <button data-token="9" aria-label="Nine">9</button>
+              <button data-token="/" class="accent" aria-label="Divide">÷</button>
 
-              <button data-token="4">4</button>
-              <button data-token="5">5</button>
-              <button data-token="6">6</button>
-              <button data-token="*" class="accent">×</button>
+              <button data-token="4" aria-label="Four">4</button>
+              <button data-token="5" aria-label="Five">5</button>
+              <button data-token="6" aria-label="Six">6</button>
+              <button data-token="*" class="accent" aria-label="Multiply">×</button>
 
-              <button data-token="1">1</button>
-              <button data-token="2">2</button>
-              <button data-token="3">3</button>
-              <button data-token="-" class="accent">−</button>
+              <button data-token="1" aria-label="One">1</button>
+              <button data-token="2" aria-label="Two">2</button>
+              <button data-token="3" aria-label="Three">3</button>
+              <button data-token="-" class="accent" aria-label="Subtract">−</button>
 
-              <button data-token="0">0</button>
-              <button data-token=".">.</button>
-              <button data-token="^" class="accent">^</button>
-              <button data-token="+" class="accent">+</button>
+              <button data-token="0" aria-label="Zero">0</button>
+              <button data-token="." aria-label="Decimal point">.</button>
+              <button data-token="^" class="accent" aria-label="Exponent">^</button>
+              <button data-token="+" class="accent" aria-label="Add">+</button>
 
-              <button data-token="(">(</button>
-              <button data-token=")">)</button>
-              <button id="backspace">⌫</button>
-              <button id="clear">AC</button>
+              <button data-token="(" aria-label="Open parenthesis">(</button>
+              <button data-token=")" aria-label="Close parenthesis">)</button>
+              <button id="backspace" aria-label="Delete last character">⌫</button>
+              <button id="clear" aria-label="Clear expression">AC</button>
             </div>
           </div>
         </section>
@@ -72,9 +72,16 @@
               <h2>Stored expressions</h2>
               <p class="subtitle">Recent results are saved locally for reuse.</p>
             </div>
-            <button id="clear-history" class="ghost">Clear history</button>
+            <button id="clear-history" class="ghost" aria-label="Clear calculation history">
+              Clear history
+            </button>
           </div>
-          <div id="history-list" class="history-list" aria-live="polite"></div>
+          <div
+            id="history-list"
+            class="history-list"
+            aria-live="polite"
+            aria-label="Calculation history entries"
+          ></div>
         </section>
       </main>
     </div>

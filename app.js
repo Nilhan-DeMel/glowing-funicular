@@ -24,10 +24,32 @@ const historyList = document.getElementById("history-list");
 const evaluateButton = document.getElementById("evaluate");
 const clearHistoryButton = document.getElementById("clear-history");
 const toastContainer = document.getElementById("toast-container");
+const tokenKeys = new Set([
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  ".",
+  "+",
+  "-",
+  "*",
+  "/",
+  "^",
+  "(",
+  ")",
+]);
 
 function showToast(message, variant = "error", duration = 3200) {
   const toast = document.createElement("div");
   toast.className = `toast ${variant}`;
+  toast.setAttribute("role", variant === "error" ? "alert" : "status");
+  toast.setAttribute("aria-live", variant === "error" ? "assertive" : "polite");
   toast.textContent = message;
   toastContainer.appendChild(toast);
   setTimeout(() => {
@@ -112,11 +134,17 @@ function renderHistory() {
     const copyBtn = document.createElement("button");
     copyBtn.textContent = "Copy";
     copyBtn.title = "Copy expression to clipboard";
+    copyBtn.setAttribute("aria-label", `Copy ${item.expression} = ${item.result}`);
     copyBtn.addEventListener("click", () => copyExpression(item));
 
     const favBtn = document.createElement("button");
     favBtn.textContent = item.favorite ? "★" : "☆";
     favBtn.title = "Toggle favorite";
+    favBtn.setAttribute("aria-pressed", String(item.favorite));
+    favBtn.setAttribute(
+      "aria-label",
+      item.favorite ? "Remove from favorites" : "Mark as favorite"
+    );
     favBtn.addEventListener("click", () => toggleFavorite(item.timestamp));
 
     actions.appendChild(copyBtn);
@@ -428,6 +456,40 @@ function bindEvents() {
     if (event.key === "Enter") {
       event.preventDefault();
       evaluateExpression();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+
+    const key = event.key;
+    const targetIsInput = event.target === expressionInput;
+
+    if (tokenKeys.has(key)) {
+      if (!targetIsInput) {
+        appendToExpression(key);
+        event.preventDefault();
+      }
+      return;
+    }
+
+    if (key === "Enter" || key === "=") {
+      event.preventDefault();
+      evaluateExpression();
+      return;
+    }
+
+    if (key === "Backspace") {
+      if (!targetIsInput) {
+        event.preventDefault();
+        removeLastChar();
+      }
+      return;
+    }
+
+    if (key === "Escape") {
+      event.preventDefault();
+      clearExpression();
     }
   });
 }
