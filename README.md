@@ -1,58 +1,37 @@
-# Calculator
+# Multi-Surface Calculator Lab
 
-A simple command-line calculator supporting addition, subtraction, multiplication, division, and exponentiation.
+> A compact engineering exercise spanning a tested Python calculation core, browser interaction design, animation, persistence, accessibility, and a reusable typed React component.
 
-## Installation
+The repository intentionally explores the same small domain through several interfaces. That makes it useful for comparing domain logic, UI state, error handling, and accessibility without the noise of a large backend.
 
-Requires Python 3.11+.
+## Included surfaces
 
-## Usage
+- A Python 3.11+ CLI with left-to-right folding across multiple operands.
+- Explicit error handling for unsupported operations, insufficient operands, and division by zero.
+- A client-only calculator with expression validation and local history/favorites.
+- An animated browser variant under `web/` with parallax particles and mode transitions.
+- A typed `CalculatorPanel.tsx` component with keyboard/accessibility affordances.
+- Eight Python unit tests covering the domain core and error paths.
 
-Run operations by invoking the module and passing an operation followed by numbers:
+## Verify
 
 ```bash
+python -m unittest discover -v
 python calculator.py add 1 2 3
-# 6
-
-python calculator.py div 100 4 2
-# 12.5
-
-python calculator.py pow 2 3
-# 8
+python calculator.py pow 2 8
 ```
 
-If you provide an unsupported operation, too few operands, or attempt division by zero, the program prints an error message and exits.
-
-## Web client
-
-A browser-based calculator lives in `index.html` and runs entirely on the client. It:
-
-- Parses and validates expressions locally (supports `+`, `-`, `*`, `/`, `^`, and parentheses).
-- Shows toast errors for malformed expressions or division by zero.
-- Saves recent calculations in `localStorage` and renders a HistoryPanel with copy and favorite toggles.
-
-To try it locally, start a static server from the project root and open `http://localhost:8000`:
+Serve either browser surface with Python:
 
 ```bash
 python -m http.server 8000
+python -m http.server 8001 --directory web
 ```
 
-## Testing
+## Engineering guide
 
-Run the unit tests with:
+See [ENGINEERING_OVERVIEW.md](ENGINEERING_OVERVIEW.md) for the architecture and current boundaries.
 
-```bash
-python -m unittest discover
-```
+## Status
 
-## Animated web demo
-
-A lightweight animated calculator UI is available under `web/`. Serve that
-folder locally to try the parallax particle field and animated mode/result
-transitions:
-
-```bash
-python -m http.server 8000 --directory web
-```
-
-Then open http://localhost:8000 in your browser.
+This is a focused learning/prototyping repository rather than a packaged calculator product. The Python core is tested; the standalone React component is source-level portfolio evidence and is not wired into a complete React application in this repository.
